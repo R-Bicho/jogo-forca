@@ -7,7 +7,8 @@ print('\t- Você possui 6 chances para acertar a palavra;\n\
     \t- Palavras compostas são aceitas.\n')
 
 palavra = input('Digite uma palavra para brincar: ').lower()
-palavra_reg_exp = re.compile(r'^[a-z A-Z á-ú]+\-?[a-z A-Z á-ú]*$')
+palavra_reg_exp = re.compile(r'^[a-z A-Z á-ú Á-Ú]+\-?[a-z A-Z á-ú Á-Ú]*$')
+letra_reg_exp = re.compile(r'^[a-z A-Z á-ú Á-Ú -]+$')
 
 if not palavra_reg_exp.match(palavra):
     raise TypeError('A palavra deve conter apenas letras')
@@ -18,6 +19,10 @@ erros = 0
 
 while True:
     letra = input('Digite uma letra: ').lower().strip()
+
+    if not letra_reg_exp.match(letra):
+        print('Digite apenas letras')
+        continue
 
     if letra in tentativas:
         print('Você ja tentou essa letra, escolha outra!')
